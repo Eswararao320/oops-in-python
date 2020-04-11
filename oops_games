@@ -27,3 +27,25 @@ if __name__ == "__main__":
 
     print(block_one.value)  
     print(block_two.value)
+    
+    
+   ............
+   
+   input:12
+   output:12 in box
+   
+   
+   class Block:
+    # TODO: write your code here
+    def __init__(self,a):
+        self.a=str(a)
+        
+    def block_value(self):
+        return ('+'+len(self.a)*'-'+'+'+'\n'+'|'+self.a+'|'+'\n'+'+'+len(self.a)*'-'+'+')
+        
+
+if __name__ == "__main__":
+    block_value = int(input())
+    
+    block_one = Block(block_value)
+    print(block_one.block_value())
