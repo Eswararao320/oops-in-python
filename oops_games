@@ -49,3 +49,82 @@ if __name__ == "__main__":
     
     block_one = Block(block_value)
     print(block_one.block_value())
+    
+    
+    
+    ........
+    
+    
+    input:2
+    output:true
+           true
+           1 in box
+           1 in box
+         
+       class Block:
+    # TODO: write your code here
+    def __init__(self,value):
+        self._value=value
+    @property
+    def value(self):
+        return self._value
+            
+
+class SuperBlock(Block):
+    # TODO: write your code here
+    def __init__(self,value):
+        super().__init__(value)
+    def split(self):
+        l=[]
+        if self.value<=1:
+            k=self.value
+            k=str(k)
+            l.append('+'+len(k)*'-'+'+'+'\n'+'|'+k+'|'+'\n'+'+'+len(k)*'-'+'+')
+            return l
+        else:
+            if self.value%2==0:
+                k=(self.value//2)
+                k1=(self.value//2)
+            elif self.value%2!=0:
+                k=((self.value)//2)
+                k1=((self.value)//2)+1
+        
+            k=str(k)
+            k1=str(k1)
+            l.append('+'+len(k)*'-'+'+'+'\n'+'|'+k+'|'+'\n'+'+'+len(k)*'-'+'+')
+
+            l.append('+'+len(k1)*'-'+'+'+'\n'+'|'+k1+'|'+'\n'+'+'+len(k1)*'-'+'+')
+            return l
+        
+if __name__ == "__main__":
+    super_block_value = int(input())
+
+    super_block_one = SuperBlock(super_block_value)
+
+    try:
+        super_block_one._value
+    except AttributeError:
+        print("Missed protecting value")
+
+    try:
+        super_block_one.value = 1
+        print("Missed setting safe access to value")
+    except AttributeError:
+        pass
+
+    print(isinstance(super_block_one, SuperBlock))
+
+    try:
+        print(isinstance(super_block_one, Block))
+    except:
+        print("You should use Block class to build SuperBlock")
+
+    blocks = super_block_one.split()
+    if len(blocks) > 1:
+        print(blocks[0])
+        print(blocks[1])
+    else:
+        print(blocks[0])
+        
+        
+        ..............
