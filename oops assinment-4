@@ -1,3 +1,4 @@
+Numerator,Denominator
 input: [1,2]
 out:True
     1
@@ -62,7 +63,7 @@ if __name__ == "__main__":
     print(fraction.denominator)
     
     .............
-    
+  Create a Fraction
   input :[43,23]
   out :True
        43/23
@@ -126,6 +127,7 @@ if __name__ == "__main__":
     print(fraction_one.value())
     
     ...........
+    
  Fraction addition
  input:[[-5,2],[3,2]]
  out:-5/2 + 3/2 = -1/1
@@ -216,3 +218,105 @@ if __name__ == "__main__":
     print(isinstance(fraction_two, Fraction))
     print(result_fraction.numerator)
     print(result_fraction.denominator)
+    
+    
+    ........
+    
+    
+    Subtract Fraction
+    input:[[1,2],[1,2]]
+    out:1/2 - 1/2 = 0/1
+        True
+        True
+        0
+        1
+
+    
+    #from fractions import Fraction as frac
+import math
+class Fraction(object):
+    # TODO: write your code here
+    def __init__(self,a,b):
+        self._numerator=a
+        self._denominator=b
+        if(self._denominator<0):
+            self._numerator=-a
+            self._denominator=-b
+        k=math.gcd(self._numerator,self._denominator)
+        self._numerator=self._numerator//k
+        self._denominator=self._denominator//k
+    
+    def __str__(self):
+        nume=str(self._numerator)
+        dnom=str(self._denominator)
+        return(nume+'/'+dnom)
+    
+    
+    def __sub__(self,other):
+        nume=(self._numerator*other._denominator)-(other._numerator*self._denominator)
+        dnom=self._denominator*other._denominator
+        k1=math.gcd(nume,dnom)
+        nume=nume//k1
+        dnom=dnom//k1
+        C=Fraction(nume,dnom)
+        
+    
+        
+        '''print(str(self._numerator)+'/'+str(self._denominator)+' + '+str(other._numerator)+'/'+str(other._denominator)+' = '+str(A)+'/'+str(B))'''
+        
+        
+        print('{} - {} = {}'.format(self,other,C))
+        
+        return Fraction(nume,dnom)
+        
+    @property
+    def numerator(self):
+       return self._numerator
+    @property
+    def denominator(self):
+        return self._denominator
+    
+    
+    
+if __name__ == "__main__":
+    import json
+    import math
+    input_args = list(json.loads(input()))
+
+    fraction_one = Fraction(*input_args[0])
+    fraction_two = Fraction(*input_args[1])
+
+    result_fraction = fraction_one - fraction_two
+
+    try:
+        fraction_one._numerator
+    except AttributeError:
+        print("Missed protecting numerator")
+
+    try:
+        fraction_one._denominator
+    except AttributeError:
+        print("Missed protecting denominator")
+
+    try:
+        fraction_one.numerator = 1
+        print("Missed setting safe access to numerator")
+    except AttributeError:
+        pass
+
+    try:
+        fraction_one.denominator = 1
+        print("Missed setting safe access to numerator")
+    except AttributeError:
+        pass
+
+    print(isinstance(fraction_one, Fraction))
+    print(isinstance(fraction_two, Fraction))
+    print(result_fraction.numerator)
+    print(result_fraction.denominator)
+    
+    ............
+    
+    
+    
+    
