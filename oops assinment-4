@@ -410,6 +410,83 @@ if __name__ == "__main__":
     
     ..........
     
+   FRACTION DIVISION
+   INPUT:[[1,2],[1,2]]
+   OUT:1/2 / 1/2 = 1/1
+       True
+       True
+       1
+       1
+
+    
+    from fractions import Fraction as frac
+import math
+class Fraction(object):
+    # TODO: write your code here
+    def __init__(self,a,b):
+        self._numerator=a
+        self._denominator=b
+        if(self._denominator<0):
+            self._numerator=-a
+            self._denominator=-b
+        k=math.gcd(self._numerator,self._denominator)
+        self._numerator=self._numerator//k
+        self._denominator=self._denominator//k
+        
+    def __truediv__(self,other):
+        k=frac(self._numerator,self._denominator)/frac(other._numerator,other._denominator)
+        
+        print('{}/{} / {}/{} = {}/{}'.format(self._numerator,self._denominator,other._numerator,other._denominator,k._numerator,k._denominator))
+        return k
+    
+    @property
+    def numerator(self):
+        return self._numerator
+      
+    @property
+    def denominator(self):
+        return self._denominator
+    
+    
+if __name__ == "__main__":
+    import json
+    import math
+    input_args = list(json.loads(input()))
+
+    fraction_one = Fraction(*input_args[0])
+    fraction_two = Fraction(*input_args[1])
+
+    result_fraction = fraction_one / fraction_two
+
+    try:
+        fraction_one._numerator
+    except AttributeError:
+        print("Missed protecting numerator")
+
+    try:
+        fraction_one._denominator
+    except AttributeError:
+        print("Missed protecting denominator")
+
+    try:
+        fraction_one.numerator = 1
+        print("Missed setting safe access to numerator")
+    except AttributeError:
+        pass
+
+    try:
+        fraction_one.denominator = 1
+        print("Missed setting safe access to numerator")
+    except AttributeError:
+        pass
+
+    print(isinstance(fraction_one, Fraction))
+    print(isinstance(fraction_two, Fraction))
+    print(result_fraction.numerator)
+    print(result_fraction.denominator)
+    
+    ...........
+    
     
     
     
