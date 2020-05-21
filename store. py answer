@@ -29,7 +29,7 @@ class Store:
     def __init__(self):
         self.items=[]
         
-    def add_item(self,item):
+    def add_item(self,item):#composion enduku ante has relation undi kanuka .. store ha an item.. is relation unte inherit chesukovali
         self.items.append(item)
         
     def __str__(self):
@@ -43,12 +43,12 @@ class Store:
         
         filter_list=Store()
     
-        for item in self.items:
+        for item in self.items:#item anedi variyable like i laga
             
             field_value=getattr(item,query.field) #getattr function returns the value of the specified attribute from the specified object
                 
             if query.operation=='IN' and field_value in query.value:
-                filter_list.add_item(item)
+                filter_list.add_item(item)#filter_list nundi add_item ki call ayyi items loki item append avtundi
                 
             elif query.operation=='EQ' and field_value == query.value:
                 filter_list.add_item(item)
@@ -88,3 +88,5 @@ class Store:
             if item not in filter_query.items:
                 exclude_list.add_item(item)
         return exclude_list
+
+
