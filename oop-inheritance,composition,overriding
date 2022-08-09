@@ -16,17 +16,17 @@ class Product:
         return self.deal_price
 class ElectronicItem(Product):
     def __init__(self,name,price,deal_price,rating,you_save,warrenty_in_months):
-        super().__init__(name,price,deal_price,rating,you_save)
+        super().__init__(name,price,deal_price,rating,you_save) # OVERRIDING
         self.warrenty_in_months=warrenty_in_months
     def display_product_details(self):
-        super().display_product_details()
+        super().display_product_details()#OVERRIDING
         print("Warrenty In Months : {}".format(self.warrenty_in_months))
 class Grocery(Product):
     def __init__(self,name,price,deal_price,rating,you_save,expiry_date):
-        super().__init__(name,price,deal_price,rating,you_save)
+        super().__init__(name,price,deal_price,rating,you_save)#OVERRIDING
         self.expiry_date=expiry_date
     def display_product_details(self):
-        super().display_product_details()
+        super().display_product_details()#OVERRIDING
         print("Expiry Date : {}".format(self.expiry_date))
 class Order:
     order_charges={
@@ -70,7 +70,7 @@ class Order:
 tv=ElectronicItem("Tv",10000,8000,4.5,2000,12)
 milk=Grocery("Milk",100,80,4.6,20,2025)
 my_order=Order("Normal","1-2A-3D")
-my_order.add_items(tv,5)
-my_order.add_items(milk,1)
+my_order.add_items(tv,5)#COMPOSITION class method ki values ga instance ni pampadanni composistion antam tv,milk instance
+my_order.add_items(milk,1)#COMPOSITION class method ki values ga instance ni pampadanni composistion antam tv,milk instance
 my_order.update_delevery_charges("Normal",100)
 my_order.display_order_details()
